@@ -7,10 +7,12 @@ import json
 import random, datetime, time
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'jonipunyacerita'
-app.config['MYSQL_DB'] = 'monitoring'
+app.config['SECRET_KEY'] = "^A%DJAJU^JJ123"
+app.config['MYSQL_HOST'] = 'rafiputraarma08.mysql.pythonanywhere-services.com'
+app.config['MYSQL_USER'] = 'rafiputraarma08'
+app.config['MYSQL_PASSWORD'] = 'pakhilmi'
+app.config['MYSQL_DB'] = 'rafiputraarma08$finish'
+app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 
@@ -193,7 +195,7 @@ def stop():
             pressure1 = "NORMAL"
             pressure2 = "NORMAL"
             status = "TURBIN OFF"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, temp_inlet, temp_outlet, pressure_inlet, pressure_outlet) VALUES (%s, %s, %s, %s, %s, %s)", (date_time, status, temperature1, temperature2, pressure1, pressure2))
             mysql.connection.commit()
             mysql.connection.commit()
@@ -214,7 +216,7 @@ def stopapp():
             pressure1 = "NORMAL"
             pressure2 = "NORMAL"
             status = "TURBIN OFF"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, temp_inlet, temp_outlet, pressure_inlet, pressure_outlet) VALUES (%s, %s, %s, %s, %s, %s)", (date_time, status, temperature1, temperature2, pressure1, pressure2))
             mysql.connection.commit()
             mysql.connection.commit()
@@ -233,7 +235,7 @@ def start():
             pressure1 = random.randint(85,100)
             pressure2 = pressure1 + 15
             status = "GOOD WORKING"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, temp_inlet, temp_outlet, pressure_inlet, pressure_outlet) VALUES (%s, %s, %s, %s, %s, %s)", (date_time, status, temperature1, temperature2, pressure1, pressure2))
             mysql.connection.commit()
     return ('', 204)
@@ -253,7 +255,7 @@ def startonapp():
             pressure1 = random.randint(85,100)
             pressure2 = pressure1 + 15
             status = "GOOD WORKING"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, temp_inlet, temp_outlet, pressure_inlet, pressure_outlet) VALUES (%s, %s, %s, %s, %s, %s)", (date_time, status, temperature1, temperature2, pressure1, pressure2))
             mysql.connection.commit()
     return ('', 204)
@@ -269,7 +271,7 @@ def temperatur():
             temperature1 = random.randint(50,70)
             temperature2 = temperature1 + 15
             status = "WORK"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, temp_inlet, temp_outlet) VALUES (%s, %s, %s, %s)", (date_time, status, temperature1, temperature2))
             mysql.connection.commit()
     return ('', 204)
@@ -287,7 +289,7 @@ def temperaturonapp():
             temperature1 = random.randint(50,70)
             temperature2 = temperature1 + 15
             status = "WORK"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, temp_inlet, temp_outlet) VALUES (%s, %s, %s, %s)", (date_time, status, temperature1, temperature2))
             mysql.connection.commit()
     return ('', 204)
@@ -303,7 +305,7 @@ def pressure():
             pressure1 = random.randint(85,100)
             pressure2 = pressure1 + 15
             status = "GOOD"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, pressure_inlet, pressure_outlet) VALUES (%s, %s, %s, %s)", (date_time, status, pressure1, pressure2))
             mysql.connection.commit()
     return ('', 204)
@@ -321,7 +323,7 @@ def pressureonapp():
             pressure1 = random.randint(85,100)
             pressure2 = pressure1 + 15
             status = "GOOD"
-            
+
             cur.execute("INSERT INTO monitoring_tbl (datetime, status, pressure_inlet, pressure_outlet) VALUES (%s, %s, %s, %s)", (date_time, status, pressure1, pressure2))
             mysql.connection.commit()
     return ('', 204)
@@ -330,29 +332,29 @@ def pressureonapp():
 def TempPress():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM monitoring_tbl")
-    #row_headers=[x[0] for x in cur.description] 
+    #row_headers=[x[0] for x in cur.description]
     rv = cur.fetchall()
     cur.close()
-    return render_template('TempPress.html', temppress=rv)    
+    return render_template('TempPress.html', temppress=rv)
 
 @app.route('/temperaturapp')
 def temperaturapp():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM monitoring_tbl")
-    #row_headers=[x[0] for x in cur.description] 
+    #row_headers=[x[0] for x in cur.description]
     rv = cur.fetchall()
     cur.close()
-    return render_template('temperaturapp.html', temperaturapp=rv)    
+    return render_template('temperaturapp.html', temperaturapp=rv)
 
 @app.route('/pressureapp')
 def pressureapp():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM monitoring_tbl")
-    #row_headers=[x[0] for x in cur.description] 
+    #row_headers=[x[0] for x in cur.description]
     rv = cur.fetchall()
     cur.close()
-    return render_template('pressureapp.html', pressureapp=rv)    
+    return render_template('pressureapp.html', pressureapp=rv)
 
-if __name__ == '__main__':
-    app.secret_key = "^A%DJAJU^JJ123"
-    app.run(host='0.0.0.0', debug=True)
+#if __name__ == '__main__':
+#    app.secret_key = "^A%DJAJU^JJ123"
+#    app.run( debug=True)
