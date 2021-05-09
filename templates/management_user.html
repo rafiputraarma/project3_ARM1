@@ -1,0 +1,138 @@
+{% extends 'layout.html' %} {% block title %} Home {% endblock %} {% block content %}
+
+<style>
+  body {
+    background-color: rgb(66, 114, 126);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="container">
+        <div class="starter-template">
+          <h1>Data User Login</h1>
+          <button type="button" class="btn btn-primary btn-lg" disabled>Data User</button>
+
+          <table class="table table-bordered table-secondary table-striped text-center">
+            <thead>
+              <tr>
+                <td>Id</td>
+
+                <td>Nama</td>
+                <td>Password</td>
+                <td>Status</td>
+                <td>Aksi</td>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for item in users %}
+
+              <tr>
+                <td>{{item.Id}}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.password }}</td>
+                <td>{{ item.status }}</td>
+                <td>
+                  <a href="#!" class="btn btn-secondary btn-xs" data-toggle="modal" data-target="#modalEdit{{ item.Id }}">Edit</a>
+
+                  <a href="/hapus-management_user/{{ item.Id }}" class="btn btn-dark btn-xs" onclick="return confirm('Yakin ingin hapus?')">Delete</a>
+                </td>
+                <!-- Modal -->
+
+                <div id="modalEdit{{ item.Id }}" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Edit</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+
+                      <div class="modal-body">
+                        <form action="{{ url_for('updateUser') }}" method="POST">
+                          <div class="form-group">
+                            <label>Nama:</label>
+
+                            <input type="hidden" name="id" value="{{ item.Id }}" />
+
+                            <input type="text" class="form-control" name="nama" value="{{ item.name }}" />
+                            <label>password:</label>
+                            <input type="text" class="form-control" name="password" value="{{ item.password }}" />
+                            <label>status:</label>
+                            <input type="text" class="form-control" name="status" value="{{ item.status }}" />
+                          </div>
+
+                          <div class="form-group">
+                            <button class="btn btn-warning" type="submit">Update</button>
+                          </div>
+                        </form>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                --> {% else %}
+              </tr>
+
+              <tr>
+                <td colspan="3">Unbelievable. No entries here so far</td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modal -->
+
+      <!--<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">New Data</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+              <form action="{{ url_for('saveUser') }}" method="POST">
+                <div class="form-group">
+                  <label>Nama:</label>
+
+                  <input type="text" class="form-control" name="nama" />
+                  <label>password:</label>
+
+                  <input type="text" class="form-control" name="password" />
+                  <label>status:</label>
+
+                  <input type="text" class="form-control" name="status" />
+                </div>
+
+                <div class="form-group">
+                  <button class="btn btn-primary" type="sbumit">Apply</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>-->
+
+      <!-- /.container -->
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

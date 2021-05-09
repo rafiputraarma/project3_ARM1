@@ -1,0 +1,25 @@
+Id
+</br>
+Datetime
+</br>
+Pressure Inlet
+</br>
+Pressure Outlet
+</br>
+Status
+
+<p>||</p>
+{% for item in pressureapp %}
+
+
+{{item.Id}}
+</br>
+{{ item.datetime }}
+</br>
+{{ item.pressure_inlet }}
+</br>
+{{ item.pressure_outlet }}
+</br>
+{{ item.status }}
+<p>||</p>
+{% endfor %}

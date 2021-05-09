@@ -1,0 +1,64 @@
+{% extends 'userlayout.html' %} {% block title %} DataUser {% endblock %} {% block content %}
+
+<style>
+  body {
+    background-color: rgb(66, 114, 126);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="container">
+        <div class="starter-template">
+          <h1>Data User Login</h1>
+          <button type="button" class="btn btn-primary btn-lg" disabled>Data User</button>
+
+          <table class="table table-bordered table-secondary table-striped text-center">
+            <thead>
+              <tr>
+                <td>Id</td>
+
+                <td>Nama</td>
+                <td>Password</td>
+                <td>Status</td>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for item in user1s %}
+
+              <tr>
+                <td>{{item.Id}}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.password }}</td>
+                <td>{{ item.status }}</td>
+
+                <!-- Modal -->
+
+                {% else %}
+              </tr>
+
+              <tr>
+                <td colspan="3">Unbelievable. No entries here so far</td>
+              </tr>
+
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Modal -->
+
+      <!-- /.container -->
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

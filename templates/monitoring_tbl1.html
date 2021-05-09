@@ -1,0 +1,67 @@
+{% extends 'userlayout.html' %} {% block title %} MonitoringUser {% endblock %} {% block content %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!--<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+-->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="static/js/script.js"></script>
+<style>
+  body {
+    background-color: rgb(66, 114, 126);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="">
+      {% block body %}
+      <div class="container">
+        <div class="starter-template">
+          <h1>Data Turbin Control Monitoring</h1>
+          <tr>
+            <a href="/start" class="btn btn-success btn-xs" onclick="return confirm('start operasi turbin?')">Start Turbin</a>
+            <a href="/stop" class="btn btn-danger btn-xs" onclick="return confirm('stop operasi turbin?')">Stop Turbin</a>
+            <a href="/clearlog" class="btn btn-warning btn-xs" onclick="return confirm('Hapus log?')">Emergency Stop</a>
+          </tr>
+          <table class="table table-bordered table-secondary table-striped text-center fs-1 col-md-4">
+            <thead>
+              <tr>
+                <td>Id</td>
+
+                <td>datetime</td>
+                <td>temperature inlet</td>
+                <td>temperature outlet</td>
+                <td>pressure inlet</td>
+                <td>pressure outlet</td>
+                <td>status</td>
+              </tr>
+            </thead>
+
+            <tbody id="myturbin">
+              <tr>
+                <td>{{"Loading Please wait !"}}</td>
+                <td>{{ "Loading Please wait !" }}</td>
+                <td>{{ "Loading Please wait !" }}</td>
+                <td>{{ "Loading Please wait !" }}</td>
+                <td>{{ "Loading Please wait !" }}</td>
+                <td>{{ "Loading Please wait !" }}</td>
+                <td>{{ "Loading Please wait !" }}</td>
+              </tr>
+
+              <tr>
+                <td colspan="3">Unbelievable. No entries here so far</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- /.container -->
+
+      {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

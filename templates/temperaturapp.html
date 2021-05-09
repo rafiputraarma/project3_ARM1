@@ -1,0 +1,25 @@
+Id
+</br>
+Datetime
+</br>
+Temperature Inlet
+</br>
+Temperature Outlet
+</br>
+Status
+
+<p>||</p>
+{% for item in temperaturapp %}
+
+
+{{item.Id}}
+</br>
+{{ item.datetime }}
+</br>
+{{ item.temp_inlet }}
+</br>
+{{ item.temp_outlet }}
+</br>
+{{ item.status }}
+<p>||</p>
+{% endfor %}
